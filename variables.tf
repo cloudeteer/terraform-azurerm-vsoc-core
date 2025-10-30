@@ -1,9 +1,3 @@
-variable "azure_location" {
-  description = "The Azure region for the resources to be deployed."
-  type        = string
-  default     = "germanywestcentral"
-}
-
 variable "key_vault_bypass" {
   description = "Bypass value for the Key Vault."
   type        = string
@@ -43,6 +37,12 @@ variable "key_vault_vnet_ids" {
   description = "VNet IDs for the Key Vault."
   type        = list(string)
   default     = []
+}
+
+variable "location" {
+  description = "The Azure region for the resources to be deployed."
+  type        = string
+  default     = "germanywestcentral"
 }
 
 variable "log_analytics_workspace_name" {
