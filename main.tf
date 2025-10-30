@@ -1,10 +1,3 @@
-# Resource Group
-resource "azurerm_resource_group" "vsoc_service" {
-  name     = var.resource_group_name
-  tags     = local.tags
-  location = var.location
-}
-
 # Key Vault
 resource "random_string" "key_vault_suffix" {
   length  = 4
@@ -63,7 +56,7 @@ resource "azurerm_monitor_diagnostic_setting" "sentinel_auditing" {
 
 # Set Sentinel Playbook permissions
 resource "azurerm_role_assignment" "sentinel_playbook_permissions" {
-  scope                = azurerm_resource_group.vsoc_service.id
+  scope                = var.resource_group_id
   role_definition_name = "Microsoft Sentinel Automation Contributor"
   principal_id         = var.sentinel_serviceprincipal_id
 }
