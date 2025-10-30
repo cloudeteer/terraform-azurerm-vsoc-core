@@ -1,3 +1,9 @@
+data "azurerm_client_config" "current" {}
+
+locals {
+  resource_group_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${var.resource_group_name}"
+}
+
 # Key Vault
 resource "random_string" "key_vault_suffix" {
   length  = 4
@@ -56,7 +62,7 @@ resource "azurerm_monitor_diagnostic_setting" "sentinel_auditing" {
 
 # Set Sentinel Playbook permissions
 resource "azurerm_role_assignment" "sentinel_playbook_permissions" {
-  scope                = var.resource_group_id
+  scope                = local.resource_group_id
   role_definition_name = "Microsoft Sentinel Automation Contributor"
   principal_id         = var.sentinel_serviceprincipal_id
 }

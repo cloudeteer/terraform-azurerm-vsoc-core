@@ -83,16 +83,6 @@ variable "purge_protection_enabled" {
   default     = true
 }
 
-variable "resource_group_id" {
-  description = "The id of the resource group"
-  type        = string
-
-  validation {
-    condition     = can(regex("^/subscriptions/[^/]+/resourceGroups/[^/]+$", var.resource_group_id))
-    error_message = "The resource_group_id must be a valid Azure Resource Group ID, e.g. /subscriptions/<sub_id>/resourceGroups/<rg_name>."
-  }
-}
-
 variable "resource_group_name" {
   description = "The name of the resource group."
   type        = string

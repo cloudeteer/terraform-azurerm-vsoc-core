@@ -24,7 +24,6 @@ module "example" {
   tenant_id                    = "00000000-0000-0000-0000-000000000000"
   sentinel_serviceprincipal_id = "11111111-1111-1111-1111-111111111111"
   location                     = "germanywestcentral"
-  resource_group_id            = "/subscriptions/22222222-2222-2222-2222-222222222222/resourceGroups/rg-vsoc-dev-gwc-01"
   resource_group_name          = "rg-vsoc-dev-gwc-01"
 }
 ```
@@ -49,6 +48,7 @@ The following resources are used by this module:
 - [azurerm_role_assignment.sentinel_playbook_permissions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) (resource)
 - [azurerm_sentinel_log_analytics_workspace_onboarding.sentinel](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sentinel_log_analytics_workspace_onboarding) (resource)
 - [random_string.key_vault_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) (resource)
+- [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) (data source)
 
 ## Required Inputs
 
@@ -57,12 +57,6 @@ The following input variables are required:
 ### <a name="input_location"></a> [location](#input\_location)
 
 Description: The Azure region for the resources to be deployed.
-
-Type: `string`
-
-### <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id)
-
-Description: The id of the resource group
 
 Type: `string`
 
