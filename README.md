@@ -52,6 +52,12 @@ The following resources are used by this module:
 
 The following input variables are required:
 
+### <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name)
+
+Description: The name of the resource group.
+
+Type: `string`
+
 ### <a name="input_sentinel_serviceprincipal_id"></a> [sentinel\_serviceprincipal\_id](#input\_sentinel\_serviceprincipal\_id)
 
 Description: The Sentinel Service principal ID.
@@ -155,14 +161,6 @@ Description: Flag if purge protection is enabled.
 Type: `bool`
 
 Default: `true`
-
-### <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name)
-
-Description: The name of the resource group.
-
-Type: `string`
-
-Default: `"rg-vsoc-dev-gwc-01"`
 
 ### <a name="input_sentinel_customer_managed_key_enabled"></a> [sentinel\_customer\_managed\_key\_enabled](#input\_sentinel\_customer\_managed\_key\_enabled)
 

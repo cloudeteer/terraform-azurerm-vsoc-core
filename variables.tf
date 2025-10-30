@@ -87,7 +87,6 @@ variable "purge_protection_enabled" {
 variable "resource_group_name" {
   description = "The name of the resource group."
   type        = string
-  default     = "rg-vsoc-dev-gwc-01"
 
   validation {
     condition     = can(regex("^rg-vsoc-(dev|test|prod)-(gwc|weu)-[0-9]{2,}$", var.resource_group_name))
