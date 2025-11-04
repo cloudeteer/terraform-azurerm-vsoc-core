@@ -2,6 +2,10 @@ mock_provider "azurerm" {
   source = "./tests/examples/mocks"
 }
 
+mock_provider "azuread" {
+  source = "./tests/examples/mocks"
+}
+
 run "test_example_usage" {
   command = apply
 
