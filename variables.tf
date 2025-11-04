@@ -99,11 +99,6 @@ variable "sentinel_customer_managed_key_enabled" {
   default     = false
 }
 
-variable "sentinel_serviceprincipal_id" {
-  description = "The Sentinel Service principal ID."
-  type        = string
-}
-
 variable "soft_delete_retention_days" {
   description = "Retention Time for Logs in the Log Analytics Workspace."
   type        = number

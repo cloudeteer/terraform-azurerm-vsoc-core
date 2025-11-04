@@ -32,6 +32,8 @@ module "example" {
 
 The following providers are used by this module:
 
+- <a name="provider_azuread"></a> [azuread](#provider\_azuread) (>= 2.50.0)
+
 - <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 4.0)
 
 - <a name="provider_random"></a> [random](#provider\_random) (~> 3.5)
@@ -48,6 +50,7 @@ The following resources are used by this module:
 - [azurerm_role_assignment.sentinel_playbook_permissions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) (resource)
 - [azurerm_sentinel_log_analytics_workspace_onboarding.sentinel](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sentinel_log_analytics_workspace_onboarding) (resource)
 - [random_string.key_vault_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) (resource)
+- [azuread_service_principal.sentinel_serviceprincipal](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/service_principal) (data source)
 - [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) (data source)
 
 ## Required Inputs
@@ -63,12 +66,6 @@ Type: `string`
 ### <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name)
 
 Description: The name of the resource group.
-
-Type: `string`
-
-### <a name="input_sentinel_serviceprincipal_id"></a> [sentinel\_serviceprincipal\_id](#input\_sentinel\_serviceprincipal\_id)
-
-Description: The Sentinel Service principal ID.
 
 Type: `string`
 

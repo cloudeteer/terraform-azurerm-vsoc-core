@@ -61,8 +61,12 @@ resource "azurerm_monitor_diagnostic_setting" "sentinel_auditing" {
 }
 
 # Set Sentinel Playbook permissions
+data "azuread_service_principal" "sentinel_serviceprincipal" {
+  display_name = "Azure Security Insights"
+}
+
 resource "azurerm_role_assignment" "sentinel_playbook_permissions" {
   scope                = local.resource_group_id
   role_definition_name = "Microsoft Sentinel Automation Contributor"
-  principal_id         = var.sentinel_serviceprincipal_id
+  principal_id         = data.azuread_service_principal.sentinel_serviceprincipal.object_id
 }
