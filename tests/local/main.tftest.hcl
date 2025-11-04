@@ -2,9 +2,9 @@ mock_provider "azurerm" { source = "./tests/local/mocks" }
 mock_provider "azuread" { source = "./tests/local/mocks" }
 
 variables {
-  tenant_id                    = "00000000-0000-0000-0000-000000000000"
-  location                     = "germanywestcentral"
-  resource_group_name          = "rg-vsoc-dev-gwc-01"
+  tenant_id           = "00000000-0000-0000-0000-000000000000"
+  location            = "germanywestcentral"
+  resource_group_name = "rg-vsoc-dev-gwc-01"
 }
 
 run "should_pass_with_valid_resource_names" {
