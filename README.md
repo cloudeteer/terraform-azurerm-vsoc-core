@@ -32,7 +32,7 @@ module "example" {
 
 The following providers are used by this module:
 
-- <a name="provider_azuread"></a> [azuread](#provider\_azuread) (>= 2.50.0)
+- <a name="provider_azuread"></a> [azuread](#provider\_azuread) (~> 3.0)
 
 - <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 4.0)
 
