@@ -69,4 +69,6 @@ resource "azurerm_role_assignment" "sentinel_playbook_permissions" {
   scope                = local.resource_group_id
   role_definition_name = "Microsoft Sentinel Automation Contributor"
   principal_id         = data.azuread_service_principal.sentinel_serviceprincipal.object_id
+
+  depends_on = [azurerm_sentinel_log_analytics_workspace_onboarding.sentinel]
 }
