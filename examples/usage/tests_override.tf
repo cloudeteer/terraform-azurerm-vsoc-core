@@ -9,4 +9,10 @@ terraform {
   }
 }
 
-module "example" { source = "../.." }
+module "example" {
+  source = "../.."
+
+  tenant_id           = "00000000-0000-0000-0000-000000000000"
+  location            = "germanywestcentral"
+  resource_group_name = "rg-vsoc-dev-gwc-01"
+}
