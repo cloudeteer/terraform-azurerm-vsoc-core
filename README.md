@@ -21,14 +21,17 @@ module "example" {
   # Change "module" and "provider" accordingly to match you new module
   source = "cloudeteer/module/provider"
 
-  tenant_id                    = "00000000-0000-0000-0000-000000000000"
-  sentinel_serviceprincipal_id = "11111111-1111-1111-1111-111111111111"
+  tenant_id           = "00000000-0000-0000-0000-000000000000"
+  location            = "germanywestcentral"
+  resource_group_name = "rg-vsoc-dev-gwc-01"
 }
 ```
 
 ## Providers
 
 The following providers are used by this module:
+
+- <a name="provider_azuread"></a> [azuread](#provider\_azuread) (~> 3.0)
 
 - <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 4.0)
 
@@ -43,18 +46,25 @@ The following resources are used by this module:
 - [azurerm_key_vault.secrets](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault) (resource)
 - [azurerm_log_analytics_workspace.logs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_workspace) (resource)
 - [azurerm_monitor_diagnostic_setting.sentinel_auditing](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) (resource)
-- [azurerm_resource_group.vsoc_service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) (resource)
 - [azurerm_role_assignment.sentinel_playbook_permissions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) (resource)
 - [azurerm_sentinel_log_analytics_workspace_onboarding.sentinel](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sentinel_log_analytics_workspace_onboarding) (resource)
 - [random_string.key_vault_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) (resource)
+- [azuread_service_principal.sentinel_serviceprincipal](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/service_principal) (data source)
+- [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) (data source)
 
 ## Required Inputs
 
 The following input variables are required:
 
-### <a name="input_sentinel_serviceprincipal_id"></a> [sentinel\_serviceprincipal\_id](#input\_sentinel\_serviceprincipal\_id)
+### <a name="input_location"></a> [location](#input\_location)
 
-Description: The Sentinel Service principal ID.
+Description: The Azure region for the resources to be deployed.
+
+Type: `string`
+
+### <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name)
+
+Description: The name of the resource group.
 
 Type: `string`
 
@@ -67,14 +77,6 @@ Type: `string`
 ## Optional Inputs
 
 The following input variables are optional (have default values):
-
-### <a name="input_azure_location"></a> [azure\_location](#input\_azure\_location)
-
-Description: The Azure region for the resources to be deployed.
-
-Type: `string`
-
-Default: `"germanywestcentral"`
 
 ### <a name="input_key_vault_bypass"></a> [key\_vault\_bypass](#input\_key\_vault\_bypass)
 
@@ -155,14 +157,6 @@ Description: Flag if purge protection is enabled.
 Type: `bool`
 
 Default: `true`
-
-### <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name)
-
-Description: The name of the resource group.
-
-Type: `string`
-
-Default: `"rg-vsoc-dev-gwc-01"`
 
 ### <a name="input_sentinel_customer_managed_key_enabled"></a> [sentinel\_customer\_managed\_key\_enabled](#input\_sentinel\_customer\_managed\_key\_enabled)
 

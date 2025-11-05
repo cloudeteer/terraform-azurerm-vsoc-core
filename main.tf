@@ -1,8 +1,7 @@
-# Resource Group
-resource "azurerm_resource_group" "vsoc_service" {
-  name     = var.resource_group_name
-  tags     = local.tags
-  location = var.azure_location
+data "azurerm_client_config" "current" {}
+
+locals {
+  resource_group_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${var.resource_group_name}"
 }
 
 # Key Vault
@@ -15,8 +14,8 @@ resource "random_string" "key_vault_suffix" {
 resource "azurerm_key_vault" "secrets" {
   name                       = "${var.key_vault_name_prefix}-${random_string.key_vault_suffix.result}"
   tags                       = local.tags
-  location                   = var.azure_location
-  resource_group_name        = azurerm_resource_group.vsoc_service.name
+  location                   = var.location
+  resource_group_name        = var.resource_group_name
   tenant_id                  = var.tenant_id
   sku_name                   = var.key_vault_sku
   purge_protection_enabled   = var.purge_protection_enabled
@@ -34,8 +33,8 @@ resource "azurerm_key_vault" "secrets" {
 resource "azurerm_log_analytics_workspace" "logs" {
   name                = var.log_analytics_workspace_name
   tags                = local.tags
-  location            = var.azure_location
-  resource_group_name = azurerm_resource_group.vsoc_service.name
+  location            = var.location
+  resource_group_name = var.resource_group_name
   sku                 = var.log_analytics_workspace_sku
   retention_in_days   = var.log_analytics_workspace_retention_time
 }
@@ -62,8 +61,14 @@ resource "azurerm_monitor_diagnostic_setting" "sentinel_auditing" {
 }
 
 # Set Sentinel Playbook permissions
+data "azuread_service_principal" "sentinel_serviceprincipal" {
+  display_name = "Azure Security Insights"
+}
+
 resource "azurerm_role_assignment" "sentinel_playbook_permissions" {
-  scope                = azurerm_resource_group.vsoc_service.id
+  scope                = local.resource_group_id
   role_definition_name = "Microsoft Sentinel Automation Contributor"
-  principal_id         = var.sentinel_serviceprincipal_id
+  principal_id         = data.azuread_service_principal.sentinel_serviceprincipal.object_id
+
+  depends_on = [azurerm_sentinel_log_analytics_workspace_onboarding.sentinel]
 }

@@ -1,9 +1,3 @@
-variable "azure_location" {
-  description = "The Azure region for the resources to be deployed."
-  type        = string
-  default     = "germanywestcentral"
-}
-
 variable "key_vault_bypass" {
   description = "Bypass value for the Key Vault."
   type        = string
@@ -43,6 +37,11 @@ variable "key_vault_vnet_ids" {
   description = "VNet IDs for the Key Vault."
   type        = list(string)
   default     = []
+}
+
+variable "location" {
+  description = "The Azure region for the resources to be deployed."
+  type        = string
 }
 
 variable "log_analytics_workspace_name" {
@@ -87,7 +86,6 @@ variable "purge_protection_enabled" {
 variable "resource_group_name" {
   description = "The name of the resource group."
   type        = string
-  default     = "rg-vsoc-dev-gwc-01"
 
   validation {
     condition     = can(regex("^rg-vsoc-(dev|test|prod)-(gwc|weu)-[0-9]{2,}$", var.resource_group_name))
@@ -99,11 +97,6 @@ variable "sentinel_customer_managed_key_enabled" {
   description = "Enable customer managed key for Sentinel"
   type        = bool
   default     = false
-}
-
-variable "sentinel_serviceprincipal_id" {
-  description = "The Sentinel Service principal ID."
-  type        = string
 }
 
 variable "soft_delete_retention_days" {
