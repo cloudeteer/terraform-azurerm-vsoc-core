@@ -74,90 +74,27 @@ resource "azurerm_role_assignment" "sentinel_playbook_permissions" {
 }
 
 # Sentinel data connectors
-resource "azurerm_sentinel_data_connector_office_365" "m365_connector" {
-  name                       = "m365_connector"
-  log_analytics_workspace_id = azurerm_sentinel_log_analytics_workspace_onboarding.sentinel.workspace_id
-}
-
-resource "azurerm_sentinel_data_connector_microsoft_cloud_app_security" "defender_for_cloud_apps_connector" {
-  name                       = "defender_for_cloud_apps_connector"
-  log_analytics_workspace_id = azurerm_sentinel_log_analytics_workspace_onboarding.sentinel.workspace_id
-}
-
-resource "azurerm_sentinel_data_connector_microsoft_defender_advanced_threat_protection" "defender_for_endpoint_connector" {
-  name                       = "defender_for_endpoint_connector"
-  log_analytics_workspace_id = azurerm_sentinel_log_analytics_workspace_onboarding.sentinel.workspace_id
-}
-
-resource "azurerm_sentinel_data_connector_office_atp" "defender_for_o365" {
-  name                       = "defender_for_o365"
-  log_analytics_workspace_id = azurerm_sentinel_log_analytics_workspace_onboarding.sentinel.workspace_id
-}
-
-resource "azurerm_sentinel_data_connector_threat_intelligence" "defender_threat_intelligence" {
-  name                       = "defender_threat_intelligence"
-  log_analytics_workspace_id = azurerm_sentinel_log_analytics_workspace_onboarding.sentinel.workspace_id
-}
-
 resource "azurerm_sentinel_data_connector_azure_active_directory" "entraid_connector" {
   name                       = "entraid_connector"
   log_analytics_workspace_id = azurerm_sentinel_log_analytics_workspace_onboarding.sentinel.workspace_id
 }
 
-# # Sentinel data connectors with azapi (Preview)
-# # -> Azure Activity
-# resource "azapi_resource" "azure_activity_connector" {
-#   type      = "Microsoft.SecurityInsights/dataConnectors@2025-09-01"
-#   name      = "AzureActivity"
-#   parent_id = azurerm_log_analytics_workspace.logs.id
+# Sentinel data connectors with azapi (Preview!)
+# -> Microsoft Defender for Identity
+resource "azapi_resource" "defender_identity_connector" {
+  type      = "Microsoft.SecurityInsights/dataConnectors@2025-09-01"
+  name      = "AzureAdvancedThreatProtection"
+  parent_id = azurerm_log_analytics_workspace.logs.id
 
-#   body = {
-#     kind = "AzureActivity"
-#     properties = {
-#       dataTypes = {
+  body = {
+    kind = "AzureAdvancedThreatProtection"
+    properties = {
+      dataTypes = {
+        alerts = { state = "Enabled" }
+      }
+      tenantId = var.tenant_id
+    }
+  }
 
-#         logs = { state = "Enabled" }
-#       }
-#     }
-#   }
-
-#   depends_on = [azurerm_sentinel_log_analytics_workspace_onboarding.sentinel]
-# }
-
-# # -> Microsoft Defender for Identity
-# resource "azapi_resource" "defender_identity_connector" {
-#   type      = "Microsoft.SecurityInsights/dataConnectors@2025-09-01"
-#   name      = "AzureAdvancedThreatProtection"
-#   parent_id = azurerm_log_analytics_workspace.logs.id
-
-#   body = {
-#     properties = {
-#       kind = "AzureAdvancedThreatProtection"
-#       dataTypes = {
-#         alerts = { state = "Enabled" }
-#       }
-#       tenantId = var.tenant_id
-#     }
-#   }
-
-#   depends_on = [azurerm_sentinel_log_analytics_workspace_onboarding.sentinel]
-# }
-
-# # -> Microsoft Defeder XDR
-# resource "azapi_resource" "defender_xdr_connector" {
-#   type      = "Microsoft.SecurityInsights/dataConnectors@2025-09-01"
-#   name      = "MicrosoftThreatProtection"
-#   parent_id = azurerm_log_analytics_workspace.logs.id
-
-#   body = {
-#     properties = {
-#       kind = "MicrosoftThreatProtection"
-#       dataTypes = {
-#         alerts    = { state = "Enabled" }
-#         incidents = { state = "Enabled" }
-#       }
-#     }
-#   }
-
-#   depends_on = [azurerm_sentinel_log_analytics_workspace_onboarding.sentinel]
-# }
+  depends_on = [azurerm_sentinel_log_analytics_workspace_onboarding.sentinel]
+}

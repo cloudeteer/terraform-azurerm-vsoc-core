@@ -31,6 +31,8 @@ module "example" {
 
 The following providers are used by this module:
 
+- <a name="provider_azapi"></a> [azapi](#provider\_azapi) (~> 2.0)
+
 - <a name="provider_azuread"></a> [azuread](#provider\_azuread) (~> 3.0)
 
 - <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 4.0)
@@ -43,16 +45,12 @@ The following providers are used by this module:
 
 The following resources are used by this module:
 
+- [azapi_resource.defender_identity_connector](https://registry.terraform.io/providers/Azure/azapi/latest/docs/resources/resource) (resource)
 - [azurerm_key_vault.secrets](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault) (resource)
 - [azurerm_log_analytics_workspace.logs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_workspace) (resource)
 - [azurerm_monitor_diagnostic_setting.sentinel_auditing](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) (resource)
 - [azurerm_role_assignment.sentinel_playbook_permissions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) (resource)
 - [azurerm_sentinel_data_connector_azure_active_directory.entraid_connector](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sentinel_data_connector_azure_active_directory) (resource)
-- [azurerm_sentinel_data_connector_microsoft_cloud_app_security.defender_for_cloud_apps_connector](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sentinel_data_connector_microsoft_cloud_app_security) (resource)
-- [azurerm_sentinel_data_connector_microsoft_defender_advanced_threat_protection.defender_for_endpoint_connector](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sentinel_data_connector_microsoft_defender_advanced_threat_protection) (resource)
-- [azurerm_sentinel_data_connector_office_365.m365_connector](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sentinel_data_connector_office_365) (resource)
-- [azurerm_sentinel_data_connector_office_atp.defender_for_o365](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sentinel_data_connector_office_atp) (resource)
-- [azurerm_sentinel_data_connector_threat_intelligence.defender_threat_intelligence](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sentinel_data_connector_threat_intelligence) (resource)
 - [azurerm_sentinel_log_analytics_workspace_onboarding.sentinel](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sentinel_log_analytics_workspace_onboarding) (resource)
 - [random_string.key_vault_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) (resource)
 - [azuread_service_principal.sentinel_serviceprincipal](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/service_principal) (data source)
