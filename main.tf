@@ -72,3 +72,29 @@ resource "azurerm_role_assignment" "sentinel_playbook_permissions" {
 
   depends_on = [azurerm_sentinel_log_analytics_workspace_onboarding.sentinel]
 }
+
+# Sentinel data connectors
+resource "azurerm_sentinel_data_connector_azure_active_directory" "entraid_connector" {
+  name                       = "entraid_connector"
+  log_analytics_workspace_id = azurerm_sentinel_log_analytics_workspace_onboarding.sentinel.workspace_id
+}
+
+# Sentinel data connectors with azapi (Preview!)
+# -> Microsoft Defender for Identity
+resource "azapi_resource" "defender_identity_connector" {
+  type      = "Microsoft.SecurityInsights/dataConnectors@2025-09-01"
+  name      = "AzureAdvancedThreatProtection"
+  parent_id = azurerm_log_analytics_workspace.logs.id
+
+  body = {
+    kind = "AzureAdvancedThreatProtection"
+    properties = {
+      dataTypes = {
+        alerts = { state = "Enabled" }
+      }
+      tenantId = var.tenant_id
+    }
+  }
+
+  depends_on = [azurerm_sentinel_log_analytics_workspace_onboarding.sentinel]
+}
