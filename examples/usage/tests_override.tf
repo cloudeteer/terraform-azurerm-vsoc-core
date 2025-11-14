@@ -13,7 +13,9 @@ terraform {
 module "example" {
   source = "../.."
 
-  tenant_id           = "00000000-0000-0000-0000-000000000000"
-  location            = "germanywestcentral"
-  resource_group_name = "rg-vsoc-dev-gwc-01"
+  tenant_id                  = "00000000-0000-0000-0000-000000000000"
+  location                   = "germanywestcentral"
+  resource_group_name        = "rg-vsoc-dev-gwc-01"
+  github_app_installation_id = "12345678"
+
 }

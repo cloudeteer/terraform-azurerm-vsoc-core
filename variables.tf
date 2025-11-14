@@ -1,3 +1,13 @@
+variable "github_app_installation_id" {
+  description = "Die numerische ID der GitHub App Installation, die Zugriff auf das Repository gewährt."
+  type        = string
+
+  validation {
+    condition     = can(regex("^\\d{8}$", var.github_app_installation_id))
+    error_message = "Provide a valid Github App Installation ID."
+  }
+}
+
 variable "key_vault_bypass" {
   description = "Bypass value for the Key Vault."
   type        = string

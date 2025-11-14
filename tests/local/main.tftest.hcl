@@ -2,9 +2,10 @@ mock_provider "azurerm" { source = "./tests/local/mocks" }
 mock_provider "azuread" { source = "./tests/local/mocks" }
 
 variables {
-  tenant_id           = "00000000-0000-0000-0000-000000000000"
-  location            = "germanywestcentral"
-  resource_group_name = "rg-vsoc-dev-gwc-01"
+  tenant_id                  = "00000000-0000-0000-0000-000000000000"
+  location                   = "germanywestcentral"
+  resource_group_name        = "rg-vsoc-dev-gwc-01"
+  github_app_installation_id = "12345678"
 }
 
 run "should_pass_with_valid_resource_names" {
@@ -30,6 +31,28 @@ run "should_fail_with_invalid_resource_names" {
     var.resource_group_name,
     var.key_vault_name_prefix,
     var.log_analytics_workspace_name
+  ]
+
+}
+
+run "should_pass_with_valid_github_app_installation_id" {
+  command = plan
+
+  variables {
+    github_app_installation_id = "38277936"
+  }
+
+}
+
+run "should_fail_with_invalid_github_app_installation_id" {
+  command = plan
+
+  variables {
+    github_app_installation_id = "abcdefgh"
+  }
+
+  expect_failures = [
+    var.github_app_installation_id
   ]
 
 }

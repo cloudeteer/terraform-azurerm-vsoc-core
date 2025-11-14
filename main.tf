@@ -98,3 +98,31 @@ resource "azapi_resource" "defender_identity_connector" {
 
   depends_on = [azurerm_sentinel_log_analytics_workspace_onboarding.sentinel]
 }
+
+# Sentinel Repository
+resource "azapi_resource" "sentinel_repo" {
+  type      = "Microsoft.SecurityInsights/sourcecontrols@2025-09-01"
+  name      = "SentinelRepository"
+  parent_id = azurerm_log_analytics_workspace.logs.id
+
+  body = {
+    properties = {
+      repoType     = "Github"
+      displayName  = "vSOC Sentinel Content Core"
+      contentTypes = ["AnalyticRule", "AutomationRule", "HuntingQuery", "Parser", "Workbook", "Playbook"]
+
+      repository = {
+        branch     = "main"
+        displayUrl = "https://github.com/cloudeteer/chapter-vsoc-sentinel-content-core"
+        url        = "https://github.com/cloudeteer/chapter-vsoc-sentinel-content-core.git"
+      }
+
+      repositoryAccess = {
+        kind           = "App"
+        installationId = var.github_app_installation_id
+      }
+    }
+  }
+
+  depends_on = [azurerm_sentinel_log_analytics_workspace_onboarding.sentinel]
+}

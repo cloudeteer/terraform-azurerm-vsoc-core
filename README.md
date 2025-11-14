@@ -21,9 +21,11 @@ module "example" {
   # Change "module" and "provider" accordingly to match you new module
   source = "cloudeteer/module/provider"
 
-  tenant_id           = "00000000-0000-0000-0000-000000000000"
-  location            = "germanywestcentral"
-  resource_group_name = "rg-vsoc-dev-gwc-01"
+  tenant_id                  = "00000000-0000-0000-0000-000000000000"
+  location                   = "germanywestcentral"
+  resource_group_name        = "rg-vsoc-dev-gwc-01"
+  github_app_installation_id = "12345678"
+
 }
 ```
 
@@ -46,6 +48,7 @@ The following providers are used by this module:
 The following resources are used by this module:
 
 - [azapi_resource.defender_identity_connector](https://registry.terraform.io/providers/Azure/azapi/latest/docs/resources/resource) (resource)
+- [azapi_resource.sentinel_repo](https://registry.terraform.io/providers/Azure/azapi/latest/docs/resources/resource) (resource)
 - [azurerm_key_vault.secrets](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault) (resource)
 - [azurerm_log_analytics_workspace.logs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_workspace) (resource)
 - [azurerm_monitor_diagnostic_setting.sentinel_auditing](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) (resource)
@@ -59,6 +62,12 @@ The following resources are used by this module:
 ## Required Inputs
 
 The following input variables are required:
+
+### <a name="input_github_app_installation_id"></a> [github\_app\_installation\_id](#input\_github\_app\_installation\_id)
+
+Description: Die numerische ID der GitHub App Installation, die Zugriff auf das Repository gewährt.
+
+Type: `string`
 
 ### <a name="input_location"></a> [location](#input\_location)
 
